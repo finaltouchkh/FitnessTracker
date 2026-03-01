@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kris Gethin | Training Program</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #0a0a0a;
+      --dark: #111111;
+      --card: #181818;
+      --border: #2a2a2a;
+      --red: #e8291c;
+      --red-dim: #9e1c12;
+      --white: #f0ede8;
+      --grey: #888;
+      --light-grey: #555;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Barlow', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* HEADER */
+    header {
+      background: var(--dark);
+      border-bottom: 2px solid var(--red);
+      padding: 16px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 3px;
+      color: var(--white);
+      line-height: 1;
+    }
+
+    .logo span { color: var(--red); }
+
+    .program-badge {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      color: var(--grey);
+      text-transform: uppercase;
+    }
+
+    /* DAY SELECTOR */
+    .day-selector-wrap {
+      background: var(--dark);
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .day-selector-wrap::-webkit-scrollbar { display: none; }
+
+    .day-selector {
+      display: flex;
+      gap: 8px;
+      width: max-content;
+    }
+
+    .day-btn {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--grey);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 8px 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+      border-radius: 2px;
+    }
+
+    .day-btn:hover {
+      border-color: var(--red-dim);
+      color: var(--white);
+    }
+
+    .day-btn.active {
+      background: var(--red);
+      border-color: var(--red);
+      color: var(--white);
+    }
+
+    .day-btn.rest {
+      border-style: dashed;
+    }
+
+    .day-btn.rest.active {
+      background: var(--light-grey);
+      border-color: var(--light-grey);
+      border-style: solid;
+    }
+
+    /* MAIN CONTENT */
+    main {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 24px 16px 60px;
+    }
+
+    /* DAY HEADER */
+    .day-header {
+      margin-bottom: 20px;
+      animation: fadeUp 0.3s ease;
+    }
+
+    .day-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 4px;
+      color: var(--red);
+      margin-bottom: 4px;
+    }
+
+    .day-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.4rem;
+      letter-spacing: 2px;
+      line-height: 1;
+      color: var(--white);
+    }
+
+    .muscle-tag {
+      display: inline-block;
+      margin-top: 8px;
+      background: var(--border);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--grey);
+      padding: 4px 10px;
+      border-radius: 2px;
+    }
+
+    /* VIDEO */
+    .video-link {
+      display: block;
+      position: relative;
+      width: 100%;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      margin-bottom: 24px;
+      animation: fadeUp 0.3s ease 0.05s both;
+      text-decoration: none;
+      cursor: pointer;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .video-link:hover {
+      border-color: var(--red);
+      transform: translateY(-1px);
+    }
+
+    .video-thumb {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      display: block;
+    }
+
+    .video-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.1) 50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .play-btn {
+      width: 64px;
+      height: 64px;
+      background: var(--red);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s, background 0.2s;
+      box-shadow: 0 4px 20px rgba(232,41,28,0.4);
+    }
+
+    .video-link:hover .play-btn {
+      transform: scale(1.1);
+      background: #ff3322;
+    }
+
+    .play-btn svg {
+      width: 24px;
+      height: 24px;
+      fill: white;
+      margin-left: 4px;
+    }
+
+    .video-label {
+      position: absolute;
+      bottom: 12px;
+      left: 14px;
+      right: 14px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+    }
+
+    /* REST DAY */
+    .rest-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 32px 24px;
+      text-align: center;
+      margin-bottom: 24px;
+      animation: fadeUp 0.3s ease 0.05s both;
+    }
+
+    .rest-icon {
+      font-size: 2.5rem;
+      margin-bottom: 12px;
+    }
+
+    .rest-card h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 2px;
+      color: var(--grey);
+      margin-bottom: 8px;
+    }
+
+    .rest-card p {
+      font-size: 0.85rem;
+      color: var(--light-grey);
+      font-weight: 300;
+    }
+
+    /* EXERCISES */
+    .section-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 12px;
+      animation: fadeUp 0.3s ease 0.1s both;
+    }
+
+    .exercise-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      animation: fadeUp 0.3s ease 0.15s both;
+    }
+
+    .exercise-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--border);
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      transition: border-color 0.2s;
+      border-radius: 2px;
+    }
+
+    .exercise-item:hover {
+      border-left-color: var(--red);
+    }
+
+    .ex-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      color: var(--red-dim);
+      min-width: 24px;
+    }
+
+    .ex-name {
+      flex: 1;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--white);
+    }
+
+    .ex-sets-reps {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--grey);
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+      text-align: right;
+    }
+
+    .fst7-badge {
+      display: inline-block;
+      background: var(--red-dim);
+      color: var(--white);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.6rem;
+      letter-spacing: 1px;
+      padding: 2px 5px;
+      border-radius: 2px;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* FOOTER NAV */
+    .nav-footer {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 32px;
+      gap: 12px;
+      animation: fadeUp 0.3s ease 0.2s both;
+    }
+
+    .nav-btn {
+      flex: 1;
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--grey);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+      border-radius: 2px;
+    }
+
+    .nav-btn:hover:not(:disabled) {
+      border-color: var(--red);
+      color: var(--white);
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="logo">Kris <span>Gethin</span></div>
+    <div class="program-badge">Training Program</div>
+  </div>
+</header>
+
+<div class="day-selector-wrap">
+  <div class="day-selector" id="daySelector"></div>
+</div>
+
+<main id="mainContent"></main>
+
+<script>
+const workouts = [
+  {
+    day: 1,
+    title: "High-Volume Leg Workout",
+    muscles: "Quads · Hamstrings",
+    videoId: "zUTMVQcu2yM",
+    isRest: false,
+    exercises: [
+      { name: "Leg Press", sets: 4, reps: "12–20" },
+      { name: "Hamstring Curl", sets: 5, reps: "12–15" },
+      { name: "Lying Hamstring Curl", sets: 3, reps: "12–15" },
+      { name: "Leg Extension", sets: 4, reps: "15–20" },
+      { name: "Hack Squat", sets: 3, reps: "20–30" },
+    ]
+  },
+  {
+    day: 2,
+    title: "Chest & Tris",
+    muscles: "Chest · Triceps",
+    videoId: "gMFXHuOzGUQ",
+    isRest: false,
+    exercises: [
+      { name: "Flat Dumbbell Press", sets: 5, reps: "15–20" },
+      { name: "Incline Flyes", sets: 3, reps: "10–15" },
+      { name: "Straight Arm Pullovers", sets: 3, reps: "10–12" },
+      { name: "Rope Extensions", sets: 3, reps: "10–12" },
+      { name: "Lying Cable Ext", sets: 3, reps: "10–12" },
+      { name: "Overhead Dumbbell Ext", sets: 3, reps: "10–12" },
+    ]
+  },
+  {
+    day: 3,
+    title: "Rest Day",
+    subtitle: "Nutrition & Shopping",
+    muscles: "Recovery",
+    videoId: "qeL2H-DdAPk",
+    isRest: true,
+    exercises: []
+  },
+  {
+    day: 4,
+    title: "Back & Biceps",
+    muscles: "Back · Biceps",
+    videoId: "pIyqhawA2HQ",
+    isRest: false,
+    exercises: [
+      { name: "Reverse Grip Pulldown", sets: 4, reps: "8–10" },
+      { name: "Bent Over Rows", sets: 4, reps: "10–12" },
+      { name: "Hyper Extension", sets: 3, reps: "10–12" },
+      { name: "Straight Arm Pulldown", sets: 7, reps: "10–15", fst7: true },
+      { name: "Concentration Curl", sets: 5, reps: "12–15" },
+      { name: "Alternating Curl", sets: 3, reps: "12–15" },
+      { name: "Cable Curl", sets: 3, reps: "15–20" },
+    ]
+  },
+  {
+    day: 5,
+    title: "Shoulders & Calves",
+    muscles: "Shoulders · Calves",
+    videoId: "hTwPCO4rpls",
+    isRest: false,
+    exercises: [
+      { name: "Military Press", sets: 5, reps: "8–10" },
+      { name: "Side Raises", sets: 4, reps: "10–15" },
+      { name: "Upright Rows", sets: 3, reps: "7-7-7" },
+      { name: "Rear Delt Raises", sets: 7, reps: "10–15", fst7: true },
+      { name: "Standing Calf Raises", sets: 3, reps: "15–20" },
+    ]
+  },
+  {
+    day: 6,
+    title: "Rest Day",
+    subtitle: "Nutrition",
+    muscles: "Recovery",
+    videoId: "eD6IRCpPNvo",
+    isRest: true,
+    exercises: []
+  },
+  {
+    day: 7,
+    title: "Legs",
+    muscles: "Quads · Hamstrings",
+    videoId: "hM7hx_cejHE",
+    isRest: false,
+    exercises: [
+      { name: "Leg Extension", sets: 2, reps: "30" },
+      { name: "Hamstring Curl", sets: 2, reps: "20" },
+      { name: "Walking Lunges", sets: 3, reps: "40" },
+      { name: "Leg Press", sets: 3, reps: "50" },
+      { name: "Leg Extension", sets: 2, reps: "20" },
+      { name: "Hamstring Curl", sets: 2, reps: "20" },
+    ]
+  }
+];
+
+let currentDay = 0;
+
+function getYoutubeEmbedId(videoId) {
+  return videoId;
+}
+
+function renderDaySelector() {
+  const sel = document.getElementById('daySelector');
+  sel.innerHTML = workouts.map((w, i) => `
+    <button class="day-btn ${w.isRest ? 'rest' : ''} ${i === currentDay ? 'active' : ''}"
+      onclick="selectDay(${i})">
+      Day ${w.day}${w.isRest ? ' ·' : ''}
+    </button>
+  `).join('');
+}
+
+function renderContent() {
+  const w = workouts[currentDay];
+  const main = document.getElementById('mainContent');
+
+  let exercisesHTML = '';
+  if (!w.isRest && w.exercises.length > 0) {
+    exercisesHTML = `
+      <div class="section-label">Exercises</div>
+      <div class="exercise-list">
+        ${w.exercises.map((ex, i) => `
+          <div class="exercise-item">
+            <span class="ex-num">${String(i+1).padStart(2,'0')}</span>
+            <span class="ex-name">
+              ${ex.name}
+              ${ex.fst7 ? '<span class="fst7-badge">FST-7</span>' : ''}
+            </span>
+            <span class="ex-sets-reps">${ex.sets} × ${ex.reps}</span>
+          </div>
+        `).join('')}
+      </div>
+    `;
+  }
+
+  const videoBlock = `
+    <a class="video-link" href="https://www.youtube.com/watch?v=${w.videoId}" target="_blank" rel="noopener">
+      <img class="video-thumb" 
+        src="https://img.youtube.com/vi/${w.videoId}/maxresdefault.jpg"
+        onerror="this.src='https://img.youtube.com/vi/${w.videoId}/hqdefault.jpg'"
+        alt="${w.title}" loading="lazy">
+      <div class="video-overlay">
+        <div class="play-btn">
+          <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+        </div>
+      </div>
+      <div class="video-label">Watch on YouTube</div>
+    </a>
+  `;
+
+  const restBlock = w.isRest ? `
+    <div class="rest-card">
+      <div class="rest-icon">🥩</div>
+      <h3>Rest & Recover</h3>
+      <p>${w.subtitle || 'Focus on nutrition and recovery today.'}</p>
+    </div>
+  ` : '';
+
+  main.innerHTML = `
+    <div class="day-header">
+      <div class="day-number">Day ${w.day}</div>
+      <div class="day-title">${w.title}</div>
+      <span class="muscle-tag">${w.muscles}</span>
+    </div>
+    ${videoBlock}
+    ${restBlock}
+    ${exercisesHTML}
+    <div class="nav-footer">
+      <button class="nav-btn" onclick="selectDay(${currentDay - 1})" ${currentDay === 0 ? 'disabled' : ''}>← Prev Day</button>
+      <button class="nav-btn" onclick="selectDay(${currentDay + 1})" ${currentDay === workouts.length - 1 ? 'disabled' : ''}>Next Day →</button>
+    </div>
+  `;
+}
+
+function selectDay(index) {
+  if (index < 0 || index >= workouts.length) return;
+  currentDay = index;
+  renderDaySelector();
+  renderContent();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Init
+renderDaySelector();
+renderContent();
+</script>
+</body>
+</html>
