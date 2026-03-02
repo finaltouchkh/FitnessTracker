@@ -330,6 +330,100 @@
       vertical-align: middle;
     }
 
+    .note-badge {
+      display: block;
+      font-size: 0.7rem;
+      color: var(--grey);
+      font-weight: 300;
+      margin-top: 2px;
+      font-style: italic;
+    }
+
+    /* SET COUNTER */
+    .set-counter {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 14px 16px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      animation: fadeUp 0.3s ease 0.08s both;
+    }
+
+    .counter-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--grey);
+    }
+
+    .counter-controls {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .counter-display {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.2rem;
+      color: var(--white);
+      min-width: 48px;
+      text-align: center;
+      line-height: 1;
+      transition: color 0.1s;
+    }
+
+    .counter-display.flash { color: var(--red); }
+
+    .counter-btn {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--white);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      width: 44px;
+      height: 44px;
+      border-radius: 4px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+
+    .counter-btn:active { background: var(--border); transform: scale(0.93); }
+
+    .counter-btn.plus {
+      background: var(--red);
+      border-color: var(--red);
+      font-size: 2rem;
+      width: 56px;
+      height: 56px;
+    }
+
+    .counter-btn.plus:active { background: #ff3322; }
+
+    .counter-reset {
+      background: none;
+      border: none;
+      color: var(--light-grey);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      padding: 4px;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .counter-reset:active { color: var(--red); }
+
     /* ANIMATIONS */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(12px); }
@@ -479,13 +573,172 @@ const workouts = [
       { name: "Leg Extension", sets: 2, reps: "20" },
       { name: "Hamstring Curl", sets: 2, reps: "20" },
     ]
+  },
+  {
+    day: 8,
+    title: "Chest & Tris",
+    muscles: "Chest · Triceps",
+    videoId: "d97o9ww1qlQ",
+    isRest: false,
+    exercises: [
+      { name: "Flat Dumbbell Press", sets: 4, reps: "6–8" },
+      { name: "Flat Bench Dumbbell Flyes", sets: 4, reps: "8–10" },
+      { name: "Incline Cable Flyes", sets: 4, reps: "8–10", note: "1 Dropset/set" },
+      { name: "Cable Crossovers", sets: 4, reps: "8–10", note: "1 Dropset/set" },
+      { name: "Tricep Cable Pushdowns", sets: 4, reps: "16–18", note: "Last set Dropset" },
+      { name: "Reverse Cable Pushdowns", sets: 3, reps: "16–18", note: "Last set Dropset" },
+      { name: "Head Smackers / Skull Crushers / Rockers", sets: 3, reps: "7", note: "See video" },
+    ]
+  },
+  {
+    day: 9,
+    title: "Rest & Recovery",
+    subtitle: "Rest & Recovery",
+    muscles: "Recovery",
+    videoId: "uk3xG5fuNYw",
+    isRest: true,
+    exercises: []
+  },
+  {
+    day: 10,
+    title: "Shoulders",
+    muscles: "Shoulders",
+    videoId: "j66Y20w2Dks",
+    isRest: false,
+    exercises: [
+      { name: "Seated Military Press", sets: 5, reps: "8–10" },
+      { name: "Single Arm Shoulder Press", sets: 4, reps: "8–10", note: "Last set Dropset" },
+      { name: "Side Lateral Raises", sets: 4, reps: "12–16", note: "Dropset/set" },
+      { name: "Dumbbell Shrugs", sets: 4, reps: "12–20" },
+      { name: "Rear Delt Cable Crossover", sets: 7, reps: "12–15", fst7: true },
+    ]
+  },
+  {
+    day: 11,
+    title: "Calves & Abs",
+    muscles: "Calves · Abs",
+    videoId: "-1d3onuc_Qc",
+    isRest: false,
+    exercises: [
+      { name: "Standing Calf Raises", sets: 5, reps: "12–15" },
+      { name: "Donkey Raises", sets: 4, reps: "18–20" },
+      { name: "Hanging Leg Raises", sets: 3, reps: "18–20" },
+    ]
+  },
+  {
+    day: 12,
+    title: "Back & Biceps",
+    muscles: "Back · Biceps",
+    videoId: "PaPsk5YGdk0",
+    isRest: false,
+    exercises: [
+      { name: "Reverse Grip Pulldown", sets: 4, reps: "8–10" },
+      { name: "Wide Grip Lat Pulldown", sets: 4, reps: "8–12" },
+      { name: "One Arm Dumbbell Row", sets: 4, reps: "8–12" },
+      { name: "Stiff Legged Dead Lift", sets: 4, reps: "16–18" },
+      { name: "Hammer Dumbbell Curl", sets: 4, reps: "18" },
+      { name: "Preacher Machine Curl", sets: 4, reps: "14–16" },
+      { name: "E-Z Bar Curls", sets: 4, reps: "8–10" },
+    ]
+  },
+  {
+    day: 13,
+    title: "Rest & Recovery",
+    subtitle: "Rest & Recovery",
+    muscles: "Recovery",
+    videoId: "Hc3wt8TXxYk",
+    isRest: true,
+    exercises: []
+  },
+  {
+    day: 14,
+    title: "Legs",
+    muscles: "Quads · Hamstrings",
+    videoId: "JaLtGCOyckg",
+    isRest: false,
+    exercises: [
+      { name: "Leg Extension", sets: 3, reps: "18–20", note: "Superset w/ Seated Leg Curl" },
+      { name: "Seated Leg Curl", sets: 3, reps: "12–15", note: "Superset w/ Leg Extension" },
+      { name: "Hack Squat", sets: 4, reps: "50", note: "Superset w/ Standing Leg Curl" },
+      { name: "Standing Leg Curl", sets: 4, reps: "18–20", note: "Superset w/ Hack Squat" },
+    ]
+  },
+  {
+    day: 15,
+    title: "Chest & Tris",
+    muscles: "Chest · Triceps",
+    videoId: "6tqM9wZRN9U",
+    isRest: false,
+    exercises: [
+      { name: "Flat Dumbbell Press", sets: 4, reps: "6–8" },
+      { name: "Straight Arm Pullover", sets: 3, reps: "10–12" },
+      { name: "Incline Flyes", sets: 3, reps: "10–12", note: "Last set Dropset" },
+      { name: "Overhead Tricep Ext", sets: 3, reps: "12–15", note: "Last set Dropset" },
+      { name: "Dips", sets: 4, reps: "16–18" },
+      { name: "Lying Dumbbell Ext", sets: 3, reps: "10–12" },
+      { name: "Bench Dips", sets: 3, reps: "15–17" },
+    ]
+  },
+  {
+    day: 16,
+    title: "Back & Biceps",
+    muscles: "Back · Biceps",
+    videoId: "f1JU7mGQdzQ",
+    isRest: false,
+    exercises: [
+      { name: "Reverse Grip Pulldown", sets: 4, reps: "10–12" },
+      { name: "Wide Grip Lat Pulldown", sets: 3, reps: "12–14" },
+      { name: "Dumbbell Row", sets: 3, reps: "15–17" },
+      { name: "Close Grip Pullups", sets: 3, reps: "10–12" },
+      { name: "Alternating Dumbbell Curls", sets: 4, reps: "12–14" },
+      { name: "Preacher Curl", sets: 4, reps: "12–14" },
+      { name: "Spider Curls", sets: 3, reps: "15–20" },
+    ]
+  },
+  {
+    day: 17,
+    title: "Rest & Recovery",
+    subtitle: "Rest & Recovery",
+    muscles: "Recovery",
+    videoId: "rFOnDUmqI50",
+    isRest: true,
+    exercises: []
   }
 ];
 
 let currentDay = 0;
+let setCount = 0;
 
-function getYoutubeEmbedId(videoId) {
-  return videoId;
+function haptic() {
+  if (navigator.vibrate) navigator.vibrate(50);
+}
+
+function incrementSet() {
+  haptic();
+  setCount++;
+  const el = document.getElementById('setCount');
+  if (el) {
+    el.textContent = setCount;
+    el.classList.add('flash');
+    setTimeout(() => el.classList.remove('flash'), 150);
+  }
+}
+
+function resetSet() {
+  haptic();
+  setCount = 0;
+  const el = document.getElementById('setCount');
+  if (el) el.textContent = '0';
+}
+
+function openVideo(url) {
+  const a = document.createElement('a');
+  a.href = url;
+  a.target = '_blank';
+  a.rel = 'noopener noreferrer';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
 }
 
 function renderDaySelector() {
@@ -501,6 +754,7 @@ function renderDaySelector() {
 function renderContent() {
   const w = workouts[currentDay];
   const main = document.getElementById('mainContent');
+  setCount = 0;
 
   let exercisesHTML = '';
   if (!w.isRest && w.exercises.length > 0) {
@@ -513,6 +767,7 @@ function renderContent() {
             <span class="ex-name">
               ${ex.name}
               ${ex.fst7 ? '<span class="fst7-badge">FST-7</span>' : ''}
+              ${ex.note ? `<span class="note-badge">${ex.note}</span>` : ''}
             </span>
             <span class="ex-sets-reps">${ex.sets} × ${ex.reps}</span>
           </div>
@@ -522,10 +777,9 @@ function renderContent() {
   }
 
   const videoBlock = `
-    <a class="video-link" href="https://www.youtube.com/watch?v=${w.videoId}" target="_blank" rel="noopener">
+    <div class="video-link" onclick="openVideo('https://www.youtube.com/watch?v=${w.videoId}')">
       <img class="video-thumb" 
-        src="https://img.youtube.com/vi/${w.videoId}/maxresdefault.jpg"
-        onerror="this.src='https://img.youtube.com/vi/${w.videoId}/hqdefault.jpg'"
+        src="https://img.youtube.com/vi/${w.videoId}/hqdefault.jpg"
         alt="${w.title}" loading="lazy">
       <div class="video-overlay">
         <div class="play-btn">
@@ -533,8 +787,21 @@ function renderContent() {
         </div>
       </div>
       <div class="video-label">Watch on YouTube</div>
-    </a>
+    </div>
   `;
+
+  const counterBlock = !w.isRest ? `
+    <div class="set-counter">
+      <div>
+        <div class="counter-label">Set Counter</div>
+        <button class="counter-reset" onclick="resetSet()">Reset</button>
+      </div>
+      <div class="counter-controls">
+        <span class="counter-display" id="setCount">0</span>
+        <button class="counter-btn plus" onclick="incrementSet()">+</button>
+      </div>
+    </div>
+  ` : '';
 
   const restBlock = w.isRest ? `
     <div class="rest-card">
@@ -550,6 +817,7 @@ function renderContent() {
       <div class="day-title">${w.title}</div>
       <span class="muscle-tag">${w.muscles}</span>
     </div>
+    ${counterBlock}
     ${videoBlock}
     ${restBlock}
     ${exercisesHTML}
