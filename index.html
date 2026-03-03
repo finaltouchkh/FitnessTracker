@@ -285,13 +285,14 @@
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      transition: border-color 0.2s;
+      transition: border-color 0.2s, background 0.15s;
       border-radius: 2px;
+      -webkit-tap-highlight-color: transparent;
+      cursor: pointer;
     }
 
-    .exercise-item:hover {
-      border-left-color: var(--red);
-    }
+    .exercise-item:hover { border-left-color: var(--red); }
+    .exercise-item:active { border-left-color: var(--red); background: #1e1e1e; }
 
     .ex-num {
       font-family: 'Bebas Neue', sans-serif;
@@ -424,7 +425,137 @@
 
     .counter-reset:active { color: var(--red); }
 
-    /* ANIMATIONS */
+    /* REST TIMER */
+    .rest-timer {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 14px 16px;
+      margin-bottom: 20px;
+      animation: fadeUp 0.3s ease 0.1s both;
+    }
+
+    .timer-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--grey);
+      margin-bottom: 10px;
+    }
+
+    .timer-presets {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .timer-preset-btn {
+      flex: 1;
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--grey);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      padding: 8px 4px;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 0.15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .timer-preset-btn:active,
+    .timer-preset-btn.selected {
+      background: var(--red);
+      border-color: var(--red);
+      color: var(--white);
+    }
+
+    .timer-display-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .timer-countdown {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.8rem;
+      color: var(--white);
+      line-height: 1;
+      transition: color 0.2s;
+      letter-spacing: 2px;
+    }
+
+    .timer-countdown.running { color: var(--red); }
+    .timer-countdown.done { color: #44cc66; }
+
+    .timer-controls {
+      display: flex;
+      gap: 8px;
+    }
+
+    .timer-btn {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--white);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 8px 14px;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 0.15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .timer-btn.start { background: var(--red); border-color: var(--red); }
+    .timer-btn:active { opacity: 0.7; transform: scale(0.96); }
+
+    /* DAY COMPLETION */
+    .day-btn.completed {
+      border-color: #2a5c3a;
+      color: #44cc66;
+    }
+
+    .day-btn.completed::after {
+      content: ' ✓';
+      font-size: 0.6rem;
+    }
+
+    .day-btn.active.completed {
+      background: #1a4028;
+      border-color: #44cc66;
+      color: #44cc66;
+    }
+
+    .complete-btn {
+      width: 100%;
+      margin-top: 16px;
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--grey);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 14px;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: all 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .complete-btn:active { transform: scale(0.98); }
+
+    .complete-btn.done {
+      background: #1a4028;
+      border-color: #44cc66;
+      color: #44cc66;
+    }
+
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(12px); }
       to { opacity: 1; transform: translateY(0); }
@@ -953,16 +1084,176 @@ const workouts = [
       { name: "Standing Calf Raises", sets: 5, reps: "20" },
       { name: "Dumbbell Shrugs", sets: 4, reps: "20" },
     ]
+  },
+  {
+    day: 39,
+    title: "Chest, Triceps & Abs",
+    muscles: "Chest · Triceps · Abs",
+    videoId: "aak7WptwRbM",
+    isRest: false,
+    exercises: [
+      { name: "Dumbbell Press", sets: 5, reps: "6–8" },
+      { name: "Decline Press", sets: 3, reps: "6–8", note: "Triple Dropset last set" },
+      { name: "Incline Flyes", sets: 3, reps: "8–10", note: "Double Dropset last set" },
+      { name: "Cable Crossover", sets: 3, reps: "10–12", note: "Dropset last set" },
+      { name: "Lying Tricep Ext", sets: 3, reps: "10–12", note: "Superset w/ Pullovers" },
+      { name: "Lying Pullovers", sets: 3, reps: "10–12", note: "Superset w/ Tricep Ext" },
+      { name: "Overhead Dumbbell Ext", sets: 3, reps: "10–12" },
+      { name: "Dips", sets: 3, reps: "10–12" },
+      { name: "Incline Crunches", sets: 3, reps: "12–15" },
+    ]
+  },
+  {
+    day: 40,
+    title: "Legs",
+    muscles: "Quads · Hamstrings",
+    videoId: "YuOVuCWxsG4",
+    isRest: false,
+    exercises: [
+      { name: "Leg Press", sets: 3, reps: "25", note: "Superset w/ Squats" },
+      { name: "Squats", sets: 3, reps: "8–10", note: "Superset w/ Leg Press" },
+      { name: "Leg Curl", sets: 3, reps: "20", note: "Superset w/ Standing Leg Curl" },
+      { name: "Standing Leg Curl", sets: 3, reps: "8–10", note: "Superset w/ Leg Curl" },
+      { name: "Hack Squats", sets: 3, reps: "20–30" },
+      { name: "Leg Ext", sets: 3, reps: "20 / 10 / 5" },
+    ]
+  },
+  {
+    day: 41,
+    title: "Rest & Recovery",
+    subtitle: "Rest & Recovery",
+    muscles: "Recovery",
+    videoId: "Xzp3vC9uHUU",
+    isRest: true,
+    exercises: []
+  },
+  {
+    day: 42,
+    title: "Back & Biceps",
+    muscles: "Back · Biceps",
+    videoId: "cHKEvca2Njk",
+    isRest: false,
+    exercises: [
+      { name: "Reverse Grip Hammer Pulldowns", sets: 5, reps: "8–10" },
+      { name: "Single Arm Rows", sets: 4, reps: "15–18" },
+      { name: "Reverse Grip Bent Over Row", sets: 4, reps: "10–12" },
+      { name: "Reverse Grip Pulldowns", sets: 3, reps: "12–15" },
+      { name: "Spider Curls", sets: 4, reps: "10–12" },
+      { name: "Concentration Curls", sets: 3, reps: "12–15" },
+      { name: "Machine Curls", sets: 7, reps: "10–15", fst7: true },
+    ]
+  },
+  {
+    day: 43,
+    title: "Shoulders, Calves & Abs",
+    muscles: "Shoulders · Calves · Abs",
+    videoId: "W3_j0jkQ1Eg",
+    isRest: false,
+    exercises: [
+      { name: "Dumbbell Shoulder Press", sets: 4, reps: "6–10" },
+      { name: "Side Raise", sets: 4, reps: "10–12", note: "Double Dropset last set" },
+      { name: "Alternating Front Raises", sets: 3, reps: "10–12" },
+      { name: "Cable Side Raises", sets: 3, reps: "10–12" },
+      { name: "Upright Wide Rows", sets: 7, reps: "12–15", fst7: true },
+      { name: "Calf Raises", sets: 3, reps: "20", note: "Superset w/ Crunches" },
+      { name: "Crunches", sets: 3, reps: "20", note: "Superset w/ Calf Raises" },
+    ]
+  },
+  {
+    day: 44,
+    title: "Rest & Recovery",
+    subtitle: "Rest & Recovery",
+    muscles: "Recovery",
+    videoId: "XZMXnDi3yrM",
+    isRest: true,
+    exercises: []
+  },
+  {
+    day: 45,
+    title: "Chest & Triceps",
+    muscles: "Chest · Triceps",
+    videoId: "OWPtLxNX_ak",
+    isRest: false,
+    exercises: [
+      { name: "Incline Flyes", sets: 4, reps: "10–12" },
+      { name: "Machine Press", sets: 4, reps: "12–15" },
+      { name: "Pushup Variation", sets: 3, reps: "10" },
+      { name: "Dips", sets: 3, reps: "10–12" },
+      { name: "Overhead Tricep Ext", sets: 4, reps: "12–15" },
+      { name: "Cable Pushdowns", sets: 3, reps: "10–12" },
+    ]
+  },
+  {
+    day: 46,
+    title: "Legs",
+    muscles: "Quads · Hamstrings",
+    videoId: "6ZQP9_r1amU",
+    isRest: false,
+    exercises: [
+      { name: "Leg Ext", sets: 4, reps: "20" },
+      { name: "Partial Leg Ext", sets: 4, reps: "20", note: "Drop weight every 10 reps" },
+      { name: "Leg Press", sets: 3, reps: "20-20-20", note: "Move feet up the plate each set" },
+      { name: "Walking Lunges", sets: 2, reps: "15–20" },
+      { name: "Stiff-legged Deadlift", sets: 3, reps: "12–15" },
+    ]
+  },
+  {
+    day: 47,
+    title: "Rest & Recovery",
+    subtitle: "Rest & Recovery",
+    muscles: "Recovery",
+    videoId: "oDSE7oyKw4Y",
+    isRest: true,
+    exercises: []
+  },
+  {
+    day: 48,
+    title: "Rest & Recovery",
+    subtitle: "Rest & Recovery",
+    muscles: "Recovery",
+    videoId: "sDwz6rlCxdY",
+    isRest: true,
+    exercises: []
+  },
+  {
+    day: 49,
+    title: "Back & Biceps",
+    muscles: "Back · Biceps",
+    videoId: "fHDdCGVQiDQ",
+    isRest: false,
+    exercises: [
+      { name: "Chins", sets: 3, reps: "15", note: "Giant Set w/ Cable Rows & Pulldowns" },
+      { name: "Cable Rows", sets: 3, reps: "15", note: "Giant Set w/ Chins & Pulldowns" },
+      { name: "Behind the Neck Pulldowns", sets: 3, reps: "15", note: "Giant Set w/ Chins & Cable Rows" },
+      { name: "Bent Over Rows", sets: 4, reps: "8–10" },
+      { name: "Hammer Curls", sets: 4, reps: "20" },
+      { name: "Barbell Curls", sets: 3, reps: "12–15" },
+      { name: "Hammer Cable Curls", sets: 3, reps: "20" },
+    ]
+  },
+  {
+    day: 50,
+    title: "Rest & Recovery",
+    subtitle: "Rest & Recovery",
+    muscles: "Recovery",
+    videoId: "cfy3xRPIte8",
+    isRest: true,
+    exercises: []
   }
 ];
 
 let currentDay = 0;
 let setCount = 0;
+let timerInterval = null;
+let timerSeconds = 0;
+let timerSelected = 60;
+let completedDays = JSON.parse(localStorage.getItem('completedDays') || '[]');
 
-function haptic() {
-  if (navigator.vibrate) navigator.vibrate(50);
+function haptic(duration = 50) {
+  if (navigator.vibrate) navigator.vibrate(duration);
 }
 
+// SET COUNTER
 function incrementSet() {
   haptic();
   setCount++;
@@ -981,6 +1272,96 @@ function resetSet() {
   if (el) el.textContent = '0';
 }
 
+// REST TIMER
+function selectTimer(seconds) {
+  timerSelected = seconds;
+  stopTimer();
+  timerSeconds = seconds;
+  document.querySelectorAll('.timer-preset-btn').forEach(b => b.classList.remove('selected'));
+  const btn = document.getElementById('preset_' + seconds);
+  if (btn) btn.classList.add('selected');
+  updateTimerDisplay();
+}
+
+function startTimer() {
+  if (timerInterval) { stopTimer(); return; }
+  if (timerSeconds <= 0) timerSeconds = timerSelected;
+  haptic();
+  const display = document.getElementById('timerDisplay');
+  const startBtn = document.getElementById('timerStartBtn');
+  if (display) display.classList.add('running');
+  if (startBtn) startBtn.textContent = 'Stop';
+  timerInterval = setInterval(() => {
+    timerSeconds--;
+    updateTimerDisplay();
+    if (timerSeconds <= 0) {
+      clearInterval(timerInterval);
+      timerInterval = null;
+      haptic([100, 50, 100, 50, 200]);
+      const d = document.getElementById('timerDisplay');
+      const s = document.getElementById('timerStartBtn');
+      if (d) { d.classList.remove('running'); d.classList.add('done'); d.textContent = 'GO!'; }
+      if (s) s.textContent = 'Start';
+      setTimeout(() => {
+        timerSeconds = timerSelected;
+        updateTimerDisplay();
+        const d2 = document.getElementById('timerDisplay');
+        if (d2) d2.classList.remove('done');
+      }, 1500);
+    }
+  }, 1000);
+}
+
+function stopTimer() {
+  if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
+  timerSeconds = timerSelected;
+  updateTimerDisplay();
+  const display = document.getElementById('timerDisplay');
+  const startBtn = document.getElementById('timerStartBtn');
+  if (display) { display.classList.remove('running', 'done'); }
+  if (startBtn) startBtn.textContent = 'Start';
+}
+
+function resetTimer() {
+  stopTimer();
+  timerSeconds = timerSelected;
+  updateTimerDisplay();
+}
+
+function updateTimerDisplay() {
+  const el = document.getElementById('timerDisplay');
+  if (el && !el.classList.contains('done')) {
+    const m = Math.floor(timerSeconds / 60);
+    const s = timerSeconds % 60;
+    el.textContent = m > 0 ? `${m}:${String(s).padStart(2,'0')}` : `${timerSeconds}`;
+  }
+}
+
+// DAY COMPLETION
+function toggleComplete() {
+  const dayNum = workouts[currentDay].day;
+  const idx = completedDays.indexOf(dayNum);
+  if (idx === -1) {
+    completedDays.push(dayNum);
+    haptic([50, 30, 100]);
+  } else {
+    completedDays.splice(idx, 1);
+    haptic();
+  }
+  localStorage.setItem('completedDays', JSON.stringify(completedDays));
+  renderDaySelector();
+  updateCompleteBtn();
+}
+
+function updateCompleteBtn() {
+  const btn = document.getElementById('completeBtn');
+  if (!btn) return;
+  const dayNum = workouts[currentDay].day;
+  const done = completedDays.includes(dayNum);
+  btn.textContent = done ? '✓ Day Complete' : 'Mark Day Complete';
+  btn.className = 'complete-btn' + (done ? ' done' : '');
+}
+
 function openVideo(url) {
   const a = document.createElement('a');
   a.href = url;
@@ -993,18 +1374,21 @@ function openVideo(url) {
 
 function renderDaySelector() {
   const sel = document.getElementById('daySelector');
-  sel.innerHTML = workouts.map((w, i) => `
-    <button class="day-btn ${w.isRest ? 'rest' : ''} ${i === currentDay ? 'active' : ''}"
+  sel.innerHTML = workouts.map((w, i) => {
+    const done = completedDays.includes(w.day);
+    return `<button class="day-btn ${w.isRest ? 'rest' : ''} ${i === currentDay ? 'active' : ''} ${done ? 'completed' : ''}"
       onclick="selectDay(${i})">
-      Day ${w.day}${w.isRest ? ' ·' : ''}
-    </button>
-  `).join('');
+      Day ${w.day}
+    </button>`;
+  }).join('');
 }
 
 function renderContent() {
   const w = workouts[currentDay];
   const main = document.getElementById('mainContent');
   setCount = 0;
+  stopTimer();
+  timerSeconds = timerSelected;
 
   let exercisesHTML = '';
   if (!w.isRest && w.exercises.length > 0) {
@@ -1028,7 +1412,7 @@ function renderContent() {
 
   const videoBlock = `
     <div class="video-link" onclick="openVideo('https://www.youtube.com/watch?v=${w.videoId}')">
-      <img class="video-thumb" 
+      <img class="video-thumb"
         src="https://img.youtube.com/vi/${w.videoId}/hqdefault.jpg"
         alt="${w.title}" loading="lazy">
       <div class="video-overlay">
@@ -1051,6 +1435,21 @@ function renderContent() {
         <button class="counter-btn plus" onclick="incrementSet()">+</button>
       </div>
     </div>
+    <div class="rest-timer">
+      <div class="timer-label">Rest Timer</div>
+      <div class="timer-presets">
+        <button class="timer-preset-btn selected" id="preset_60" onclick="selectTimer(60)">60s</button>
+        <button class="timer-preset-btn" id="preset_90" onclick="selectTimer(90)">90s</button>
+        <button class="timer-preset-btn" id="preset_120" onclick="selectTimer(120)">2 min</button>
+      </div>
+      <div class="timer-display-row">
+        <span class="timer-countdown" id="timerDisplay">60</span>
+        <div class="timer-controls">
+          <button class="timer-btn" onclick="resetTimer()">Reset</button>
+          <button class="timer-btn start" id="timerStartBtn" onclick="startTimer()">Start</button>
+        </div>
+      </div>
+    </div>
   ` : '';
 
   const restBlock = w.isRest ? `
@@ -1060,6 +1459,13 @@ function renderContent() {
       <p>${w.subtitle || 'Focus on nutrition and recovery today.'}</p>
     </div>
   ` : '';
+
+  const isDone = completedDays.includes(w.day);
+  const completeBlock = `
+    <button class="complete-btn ${isDone ? 'done' : ''}" id="completeBtn" onclick="toggleComplete()">
+      ${isDone ? '✓ Day Complete' : 'Mark Day Complete'}
+    </button>
+  `;
 
   main.innerHTML = `
     <div class="day-header">
@@ -1071,6 +1477,7 @@ function renderContent() {
     ${videoBlock}
     ${restBlock}
     ${exercisesHTML}
+    ${completeBlock}
     <div class="nav-footer">
       <button class="nav-btn" onclick="selectDay(${currentDay - 1})" ${currentDay === 0 ? 'disabled' : ''}>← Prev Day</button>
       <button class="nav-btn" onclick="selectDay(${currentDay + 1})" ${currentDay === workouts.length - 1 ? 'disabled' : ''}>Next Day →</button>
